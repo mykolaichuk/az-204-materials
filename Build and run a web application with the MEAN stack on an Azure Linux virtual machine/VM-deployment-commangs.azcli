@@ -2,16 +2,31 @@
 
 #Build and run a web application with the MEAN stack on an Azure Linux virtual machine
 
+#Create Resource group
 az group create \
   --name istep-az-204-mean \
   --location westeurope
 
+#Create VM
 az vm create \
   --resource-group istep-az-204-mean \
+  --location westeurope \
   --name MeanStack \
   --image Canonical:UbuntuServer:16.04-LTS:latest \
   --admin-username azureuser \
   --admin-password <YOUR_PASSWORD> \
-  --vnet-name Meeanstack \
-  --size Standard_B2s \
-  --location westeurope
+  --size Standard_B2s
+
+#Write VM Public IP to the variable
+ipaddress=$(az vm show \
+  --name MeanStack \
+  --resource-group istep-az-204-mean \
+  --show-details \
+  --query [publicIps] \
+  --output tsv)
+
+#Connect to the VM
+ssh azureuser@$ipaddress
+
+#Remove Resource group
+az group delete --name istep-az-204-mean

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#Build and run a web application with the MEAN stack on an Azure Linux virtual machine
+
+az group create \
+  --name istep-az-204-mean \
+  --location westeurope
+
+az vm create \
+  --resource-group istep-az-204-mean \
+  --name MeanStack \
+  --image Canonical:UbuntuServer:16.04-LTS:latest \
+  --admin-username azureuser \
+  --admin-password <YOUR_PASSWORD> \
+  --vnet-name Meeanstack \
+  --size Standard_B2s \
+  --location westeurope

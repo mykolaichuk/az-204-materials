@@ -1,4 +1,3 @@
-#Log into Azure
 $ctx = (Get-AzContext).Account.ExtendedProperties.Tenants
 if ('1c2aa41e-5b92-4906-827e-0c10f9d73859' -ne $ctx){
     $Tenant = Read-Host "Enter Tenant ID"
